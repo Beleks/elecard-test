@@ -7,22 +7,22 @@
 
 
 <style lang="scss">
+@font-face {
+  font-family: "Roboto Medium";
+  src: url("./assets/fonts/Roboto-Medium.ttf");
+}
+@font-face {
+  font-family: "Roboto Regular";
+  src: url("./assets/fonts/Roboto-Regular.ttf");
+}
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 html {
-  height: 2000px;
+  font-family: "Roboto Regular";
+  color: #f1f1fd;
   background-color: rgba(47, 53, 66, 0.95);
 }
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
-  color: #F0FAF6;
-}
-
-
 </style>
