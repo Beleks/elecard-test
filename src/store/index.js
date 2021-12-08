@@ -7,6 +7,20 @@ export default new Vuex.Store({
   state: {
     photo: []
   },
+  getters: {
+    sortedArray: state => type => {
+      let sortedArray = []
+      switch (type) {
+        case 'category':
+          sortedArray = state.photo
+          break;
+
+        default: 'category'
+          break;
+      }
+      return sortedArray
+    }
+  },
   mutations: {
     setPhoto(state, newPhotoArr) {
       state.photo = newPhotoArr
@@ -25,6 +39,11 @@ export default new Vuex.Store({
       catch {
 
       }
+    },
+    getPhotoFromLocalStorage({ commit }) {
+      const newPhotoArr = JSON.parse(localStorage.getItem("photo"))
+      console.log('getPhotoFromLocalStorage');
+      commit("setPhoto", newPhotoArr)
     },
     setToLocalStorage({ state }) {
       localStorage.setItem("photo", JSON.stringify(state.photo))

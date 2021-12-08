@@ -7,6 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    redirect: {name: 'Cards'},
     component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
     children: [
       {
@@ -16,7 +17,7 @@ const routes = [
       },
       {
         path: '/tree',
-        name: 'tree',
+        name: 'Tree',
         component: () => import(/* webpackChunkName: "about" */ '../views/Tree.vue')
       },
     ]

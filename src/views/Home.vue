@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     loading() {
-      if (this.$store.state.photo) {
+      if (this.$store.state.photo == []) {
         return true;
       } else {
         return false;
@@ -49,7 +49,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("photo")) {
-      // this.$store.dispatch("getPhotoFromLS");
+      this.$store.dispatch("getPhotoFromLocalStorage");
     } else {
       this.$store.dispatch("getPhoto");
     }
