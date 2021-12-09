@@ -7,12 +7,12 @@ function titleСorrection(title) {
   return title.substring(index + 1)
 }
 
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    photo: []
+    photo: [],
+    tree: []
   },
   getters: {
     sortedArray: state => type => {
@@ -40,6 +40,21 @@ export default new Vuex.Store({
     },
     removeEl(state, indexEl) {
       state.photo.splice(indexEl, 1)
+    },
+    setTree(state) {
+      let tree = []
+      state.photo.forEach(element => {
+        if (!tree.find(category => category.type == element.category)) {
+          tree.push({
+            type: element.category,
+            items: []
+          })
+        } else {
+          tree.find(category => category.type == element.category)
+            .items.push(element)
+        }
+      });
+      state.tree = tree
     }
   },
   actions: {
@@ -49,6 +64,7 @@ export default new Vuex.Store({
           .then(response => response.json())
           .then(obj => {
             commit("setPhoto", obj)
+            commit("setTree")
             dispatch("setToLocalStorage")
           })
       }
@@ -60,6 +76,8 @@ export default new Vuex.Store({
       const newPhotoArr = JSON.parse(localStorage.getItem("photo"))
       console.log('getPhotoFromLocalStorage');
       commit("setPhoto", newPhotoArr)
+      commit("setTree")
+
     },
     setToLocalStorage({ state }) {
       localStorage.setItem("photo", JSON.stringify(state.photo))

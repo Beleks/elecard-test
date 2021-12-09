@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     loading() {
-      if (this.$store.state.photo == []) {
+      if (this.$store.state.photo.length == 0) {
         return true;
       } else {
         return false;
@@ -59,9 +59,13 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("photo")) {
-      this.$store.dispatch("getPhotoFromLocalStorage");
+      setTimeout(() => {
+        this.$store.dispatch("getPhotoFromLocalStorage");
+      }, 500);
     } else {
-      this.$store.dispatch("getPhoto");
+      setTimeout(() => {
+        this.$store.dispatch("getPhoto");
+      }, 2000);
     }
   },
   components: {
