@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+// Корректируем название 
+function titleСorrection(title) {
+  let index = title.match(/\//).index
+  return title.substring(index + 1)
+}
+
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -9,12 +16,19 @@ export default new Vuex.Store({
   },
   getters: {
     sortedArray: state => type => {
-      let sortedArray = []
+      let sortedArray = state.photo.slice()
       switch (type) {
         case 'category':
-          sortedArray = state.photo
+          sortedArray
           break;
-        default: 'category'
+        case 'date':
+          sortedArray.sort((a, b) => a.timestamp > b.timestamp ? 1 : -1)
+          break;
+        case 'size':
+          sortedArray.sort((a, b) => a.filesize > b.filesize ? 1 : -1)
+          break;
+        case 'title':
+          sortedArray.sort((a, b) => titleСorrection(a.image) > titleСorrection(b.image) ? 1 : -1)
           break;
       }
       return sortedArray
