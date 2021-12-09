@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="svg">
     <svg
       width="24"
       height="24"
@@ -36,5 +36,8 @@
 export default {};
 </script>
 
-<style>
+<style lang="scss" scoped>
+.svg {
+  height: 24px;
+}
 </style>

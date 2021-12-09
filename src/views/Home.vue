@@ -25,7 +25,10 @@
       <div v-if="loading">Загрузка...</div>
       <div v-else><router-view /></div>
     </div>
-    <div class="section"></div>
+    <div class="section">
+      <span>made by</span>
+      <a class="author" href="https://t.me/av_belek" target="_blank">Aleksey Beletsky</a>
+    </div>
   </div>
 </template>
 
@@ -80,9 +83,6 @@ export default {
 
 .main {
   > :first-child {
-    padding: 1.5em 2.5em;
-    display: flex;
-    align-items: center;
     > div {
       margin-right: 5em;
     }
@@ -124,8 +124,19 @@ export default {
   }
   > :last-child {
     bottom: 0;
+    color: rgba(241, 241, 253, 0.6);
+    .author {
+      margin-left: 0.5em;
+      color: #f1f1fd;
+      text-decoration-line: underline;
+    }
   }
   .section {
+    z-index: 100;
+
+    padding: 1.5em 2.5em;
+    display: flex;
+    align-items: center;
     position: fixed;
     height: 60px;
     width: 100%;
