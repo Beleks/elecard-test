@@ -2,14 +2,14 @@
   <div class="card">
     <div class="img">
       <img :src="imgPath" />
-      <div class="close"><SvgClose /></div>
+      <div class="close" @click="closeCard(photo.image)"><SvgClose /></div>
     </div>
     <div class="desc">
       <div>
         <span>{{ photo.category }}</span>
-        <span>{{ photo.timestamp }}</span>
+        <span>{{ photo.timestamp | date }}</span>
       </div>
-      <div>{{ photo.filesize }}</div>
+      <div>{{ photo.filesize | fileSize }}</div>
     </div>
   </div>
 </template>
@@ -29,6 +29,11 @@ export default {
   computed: {
     imgPath() {
       return this.defPath + this.photo.image;
+    },
+  },
+  methods: {
+    closeCard(cardSrc) {
+      this.$store.dispatch("closeCard", cardSrc);
     },
   },
   components: {
@@ -66,9 +71,7 @@ export default {
       align-items: center;
       justify-content: center;
       background-color: rgba(255, 255, 255, 0.479);
-      // backdrop-filter: blur(20px);
       border-radius: 10px;
-      // backdrop-filter: brightness(60%);
       cursor: pointer;
       position: absolute;
       top: 10px;

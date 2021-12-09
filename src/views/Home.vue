@@ -19,7 +19,7 @@
           </div>
         </router-link>
       </div>
-      <div></div>
+      <div class="reset" @click="resetChanges">Сброс изменений</div>
     </div>
     <div class="content">
       <div v-if="loading">Загрузка...</div>
@@ -27,7 +27,9 @@
     </div>
     <div class="section">
       <span>made by</span>
-      <a class="author" href="https://t.me/av_belek" target="_blank">Aleksey Beletsky</a>
+      <a class="author" href="https://t.me/av_belek" target="_blank"
+        >Aleksey Beletsky</a
+      >
     </div>
   </div>
 </template>
@@ -48,6 +50,11 @@ export default {
       } else {
         return false;
       }
+    },
+  },
+  methods: {
+    resetChanges() {
+      this.$store.dispatch("resetChanges");
     },
   },
   mounted() {
@@ -120,6 +127,15 @@ export default {
       > :first-child {
         margin-right: 2.5em;
       }
+    }
+    .reset {
+      user-select: none;
+      cursor: pointer;
+      color: rgba(241, 241, 253, 0.6);
+      transition: color 0.3s ease-in-out;
+    }
+    .reset:hover {
+      color: #6f6ff094;
     }
   }
   > :last-child {

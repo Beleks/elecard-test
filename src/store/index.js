@@ -14,7 +14,6 @@ export default new Vuex.Store({
         case 'category':
           sortedArray = state.photo
           break;
-
         default: 'category'
           break;
       }
@@ -24,6 +23,9 @@ export default new Vuex.Store({
   mutations: {
     setPhoto(state, newPhotoArr) {
       state.photo = newPhotoArr
+    },
+    removeEl(state, indexEl) {
+      state.photo.splice(indexEl, 1)
     }
   },
   actions: {
@@ -47,6 +49,15 @@ export default new Vuex.Store({
     },
     setToLocalStorage({ state }) {
       localStorage.setItem("photo", JSON.stringify(state.photo))
+    },
+    closeCard({ state, commit, dispatch }, cardSrc) {
+      let index = state.photo.findIndex(el => el.image === cardSrc)
+      commit("removeEl", index)
+      dispatch("setToLocalStorage")
+    },
+    resetChanges({ dispatch }) {
+      localStorage.removeItem("photo")
+      dispatch("getPhoto")
     }
   },
   modules: {
