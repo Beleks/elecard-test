@@ -21,6 +21,11 @@ Vue.filter('date', function (value) {
   return time;
 })
 
+Vue.filter('imageTitle', function (value) {
+  let index = value.match(/\//).index
+  return value.substring(index + 1)
+})
+
 new Vue({
   router,
   store,

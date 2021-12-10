@@ -1,6 +1,10 @@
 <template>
   <div class="category">
-    <div @click="open = !open" class="switch">svg</div>
+    <div class="switch">
+      <div @click="open = !open">
+        <component :is="svgSwitch" />
+      </div>
+    </div>
     <div>
       <div class="title">{{ category.type }}</div>
       <div class="category_content" v-show="open">
@@ -16,18 +20,20 @@
 
 <script>
 import CategoryItem from "@/components/CategoryItem.vue";
+import SvgHide from "@/components/svg/SvgHide.vue";
+import SvgOpen from "@/components/svg/SvgOpen.vue";
+
+import { mixinSwitch } from "@/mixins/mixin.js";
 
 export default {
+  mixins: [mixinSwitch],
   props: {
     category: Object,
   },
-  data() {
-    return {
-      open: false,
-    };
-  },
   components: {
     CategoryItem,
+    SvgOpen,
+    SvgHide,
   },
 };
 </script>
@@ -39,13 +45,16 @@ export default {
   margin-bottom: 1em;
   .switch {
     padding: 0.5em 1em;
+    > div {
+      cursor: pointer;
+    }
   }
   .title {
     padding: 0.5em 1em;
     border-radius: 5px;
     background-color: #2f3542;
     font-size: 1.25rem;
-    width: 300px;
+    width: 500px;
   }
   .category_content {
     margin: 1em;
