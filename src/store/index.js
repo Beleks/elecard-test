@@ -47,7 +47,7 @@ export default new Vuex.Store({
         if (!tree.find(category => category.type == element.category)) {
           tree.push({
             type: element.category,
-            items: []
+            items: [element]
           })
         } else {
           tree.find(category => category.type == element.category)
